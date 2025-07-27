@@ -1,0 +1,103 @@
+{
+	"blocks": [
+		{
+			"name": "Input",
+			"description": "Get an input from the user",
+			"endpoint": "/op/input",
+			"inputs": [],
+			"outputs": [
+				{
+					"name": "Input",
+					"type": "any"
+				}
+			]
+		},
+		{
+			"name": "Integer",
+			"description": "Get an integer from the input",
+			"endpoint": "/op/integer",
+			"inputs": [
+				{
+					"name": "Input",
+					"type": "any",
+					"required": true
+				}
+			],
+			"outputs": [
+				{
+					"name": "Integer",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "Add",
+			"description": "Adds two integers together",
+			"endpoint": "/op/add",
+			"inputs": [
+				{
+					"name": "A",
+					"type": "int",
+					"required": true
+				},
+				{
+					"name": "B",
+					"type": "int",
+					"required": true
+				}
+			],
+			"outputs": [
+				{
+					"name": "Sum",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "Subtract",
+			"description": "Adds two integers together",
+			"endpoint": "/op/subtract",
+			"inputs": [
+				{
+					"name": "A",
+					"type": "int",
+					"required": true
+				},
+				{
+					"name": "B",
+					"type": "int",
+					"required": true
+				}
+			],
+			"outputs": [
+				{
+					"name": "Difference",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "Subtract",
+			"description": "Subtracts two integers",
+			"endpoint": "/op/subtract",
+			"inputs": [
+				{
+					"name": "A",
+					"type": "int",
+					"required": true
+				},
+				{
+					"name": "B",
+					"type": "int",
+					"required": true
+				}
+			],
+			"outputs": [
+				{
+					"name": "Difference",
+					"type": "int"
+				}
+			]
+		}
+	]
+}

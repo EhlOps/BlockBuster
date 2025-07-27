@@ -1,9 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "blockbuster"
-version = "0.1.0"
-description = "Add your description here"
+dynamic = ["version"]
+description = "A block-based computation framework with Flask web interface"
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = [
-    "flask>=3.1.1",
+license = "MIT"
+authors = [
+    { name = "Sam Ehlers", email = "samtehlers@gmail.com" },
 ]
+keywords = ["blocks", "computation", "web", "decorators"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: FastAPI",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.9"
+
+dependencies = [
+    "asyncio>=3.4.3",
+    "fastapi[standard]>=0.116.1",
+    "logging>=0.4.9.6",
+]
+
+# Console scripts
+[project.scripts]
+blockbuster = "blockbuster.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/EhlOps/BlockBuster"
+Repository = "https://github.com/EhlOps/BlockBuster"
+"Bug Tracker" = "https://github.com/EhlOps/BlockBuster/issues"
+
+# Hatchling build configuration
+[tool.hatch.version]
+path = "blockbuster/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["blockbuster"]

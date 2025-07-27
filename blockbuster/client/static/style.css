@@ -1,0 +1,171 @@
+body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: Arial, sans-serif;
+}
+
+.top-menu {
+	background: #333;
+	color: white;
+	padding: 12px 16px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+	position: relative;
+}
+
+.menu-title {
+	font-weight: bold;
+	margin-right: 16px;
+}
+
+.block-button {
+	background: #555;
+	color: white;
+	border: none;
+	padding: 8px 16px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background 0.2s;
+}
+
+.block-button:hover {
+	background: #666;
+}
+
+.block-button.active {
+	background: #4caf50;
+}
+
+.block-button.add {
+	background: #4caf50;
+}
+
+.block-button.add:hover {
+	background: #45a049;
+}
+
+.block-button.subtract {
+	background: #f44336;
+}
+
+.block-button.subtract:hover {
+	background: #da190b;
+}
+
+.block-button.input {
+	background: #2196f3;
+}
+
+.block-button.input:hover {
+	background: #0b7dda;
+}
+
+.container {
+	position: relative;
+	width: 100vw;
+	height: calc(100vh - 60px);
+}
+
+#canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: white;
+}
+
+.block {
+	position: absolute;
+	width: 60px;
+	height: 40px;
+	border: 2px solid;
+	border-radius: 4px;
+	cursor: move;
+	user-select: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	color: white;
+	font-weight: bold;
+}
+
+.block.add {
+	background: #4caf50;
+	border-color: #45a049;
+}
+
+.block.subtract {
+	background: #f44336;
+	border-color: #da190b;
+}
+
+.block.input {
+	background: #2196f3;
+	border-color: #0b7dda;
+	color: white;
+}
+
+.block.dragging {
+	opacity: 0.8;
+	z-index: 1000;
+}
+
+.block input {
+	background: transparent;
+	border: none;
+	color: white;
+	text-align: center;
+	width: 40px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.block input::placeholder {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.block input:focus {
+	outline: none;
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.context-menu {
+	position: fixed;
+	background: white;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	padding: 4px 0;
+	min-width: 120px;
+	z-index: 10000;
+	display: none;
+}
+
+.context-menu-item {
+	padding: 8px 16px;
+	cursor: pointer;
+	font-size: 14px;
+	border-bottom: 1px solid #eee;
+}
+
+.context-menu-item:last-child {
+	border-bottom: none;
+}
+
+.context-menu-item:hover {
+	background: #f0f0f0;
+}
+
+.context-menu-item.disabled {
+	color: #999;
+	cursor: not-allowed;
+}
+
+.context-menu-item.disabled:hover {
+	background: transparent;
+}

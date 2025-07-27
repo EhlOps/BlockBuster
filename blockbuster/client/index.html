@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>BlockBuster</title>
+		<link rel="stylesheet" href="static/style.css" />
+		<link rel="icon" type="image/x-icon" href="static/blockbuster.svg" />
+	</head>
+	<body>
+		<div class="top-menu">
+			<div class="menu-title">Block Types:</div>
+			<button class="block-button add" data-block-type="add">+ Add</button>
+			<button class="block-button subtract" data-block-type="subtract">
+				- Subtract
+			</button>
+			<button class="block-button input" data-block-type="input">
+				📝 Input
+			</button>
+			<div style="margin-left: auto; font-size: 12px; opacity: 0.8">
+				Click a block type, then click on canvas to place it
+			</div>
+		</div>
+
+		<div class="container">
+			<canvas id="canvas"></canvas>
+
+			<!-- Context Menu -->
+			<div id="contextMenu" class="context-menu">
+				<div class="context-menu-item" data-action="delete-block">
+					Delete Block
+				</div>
+				<div class="context-menu-item" data-action="reset-view">Reset View</div>
+				<div class="context-menu-item" data-action="clear-all">
+					Clear All Blocks
+				</div>
+			</div>
+		</div>
+
+		<script src="static/script.js"></script>
+	</body>
+</html>
