@@ -1,14 +1,17 @@
-from blockbuster import block, registry
-from typing import Optional
+from blockbuster import block
+
 
 @block
-def add(a: int, b: int, c: Optional[int]) -> int:
+def add(a: int, b: int) -> int:
     """
     Adds two integers together.
     """
     return a + b
 
-if __name__ == "__main__":
-    print("Registered blocks:")
-    for block, (_, data) in registry.items():
-        print(block, data)
+
+@block
+def subtract(a: int, b: int) -> int:
+    """
+    Subtracts the second integer from the first.
+    """
+    return a - b
