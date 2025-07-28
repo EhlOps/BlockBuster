@@ -1,14 +1,13 @@
+import Block from "./block.js";
+import { getState, setState } from "./state.js";\\\\\\\\\\\
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const contextMenu = document.getElementById("contextMenu");
 const container = document.querySelector(".container");
 const blockButtons = document.querySelectorAll(".block-button");
 
-let blockCounter = 0;
-let blocks = [];
-let selectedBlockType = null;
-let selectedBlock = null;
-let isPlacingMode = false;
+const block_types = await fetch("/blocks").then((response) => response.json());
 
 // Set canvas size to match its display size and device pixel ratio
 function resizeCanvas() {
@@ -19,12 +18,6 @@ function resizeCanvas() {
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
 	ctx.scale(dpr, dpr);
 }
-
-let panX = 0;
-let panY = 0;
-let isPanning = false;
-let panStartX = 0;
-let panStartY = 0;
 
 function drawGrid() {
 	const dpr = window.devicePixelRatio || 1;
@@ -55,101 +48,6 @@ function drawGrid() {
 		ctx.moveTo(0, y);
 		ctx.lineTo(width, y);
 		ctx.stroke();
-	}
-}
-
-// Block class to manage individual blocks
-class Block {
-	constructor(x, y, type) {
-		this.x = x;
-		this.y = y;
-		this.type = type;
-		this.id = ++blockCounter;
-		this.element = this.createElement();
-		this.isDragging = false;
-		this.offsetX = 0;
-		this.offsetY = 0;
-		this.value = 0; // For input blocks
-
-		blocks.push(this);
-		this.updatePosition();
-		this.attachEventListeners();
-	}
-
-	createElement() {
-		const div = document.createElement("div");
-		div.className = `block ${this.type}`;
-		div.id = `block-${this.id}`;
-
-		switch (this.type) {
-			case "add":
-				div.textContent = "+";
-				break;
-			case "subtract":
-				div.textContent = "-";
-				break;
-			case "input":
-				const input = document.createElement("input");
-				input.type = "number";
-				input.value = "0";
-				input.placeholder = "0";
-				input.addEventListener("click", (e) => e.stopPropagation());
-				input.addEventListener("mousedown", (e) => e.stopPropagation());
-				input.addEventListener("change", (e) => {
-					this.value = parseFloat(e.target.value) || 0;
-				});
-				div.appendChild(input);
-				break;
-		}
-
-		container.appendChild(div);
-		return div;
-	}
-
-	updatePosition() {
-		this.element.style.left = this.x + panX + "px";
-		this.element.style.top = this.y + panY + "px";
-	}
-
-	attachEventListeners() {
-		this.element.addEventListener("mousedown", (e) => {
-			if (e.button === 0 && e.target === this.element) {
-				this.isDragging = true;
-				this.element.classList.add("dragging");
-				const rect = this.element.getBoundingClientRect();
-				this.offsetX = e.clientX - rect.left;
-				this.offsetY = e.clientY - rect.top;
-				selectedBlock = this;
-				e.preventDefault();
-			}
-		});
-
-		this.element.addEventListener("contextmenu", (e) => {
-			e.preventDefault();
-			selectedBlock = this;
-			showContextMenu(e.clientX, e.clientY, true);
-		});
-	}
-
-	move(clientX, clientY) {
-		if (!this.isDragging) return;
-		const containerRect = container.getBoundingClientRect();
-		this.x = clientX - containerRect.left - this.offsetX - panX;
-		this.y = clientY - containerRect.top - this.offsetY - panY;
-		this.updatePosition();
-	}
-
-	stopDragging() {
-		this.isDragging = false;
-		this.element.classList.remove("dragging");
-	}
-
-	remove() {
-		this.element.remove();
-		const index = blocks.indexOf(this);
-		if (index > -1) {
-			blocks.splice(index, 1);
-		}
 	}
 }
 
@@ -229,7 +127,7 @@ canvas.addEventListener("click", function (e) {
 		const x = e.clientX - containerRect.left - panX;
 		const y = e.clientY - containerRect.top - panY;
 
-		new Block(x - 30, y - 20, selectedBlockType); // Center the block on click
+		new Block(++blockCounter, x - 30, y - 20, selectedBlockType); // Center the block on click
 
 		// Reset placing mode
 		isPlacingMode = false;
