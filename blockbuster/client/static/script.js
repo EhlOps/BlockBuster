@@ -1,5 +1,5 @@
 import Block from "./block.js";
-import { getState, setState } from "./state.js";\\\\\\\\\\\
+import { getState, setState } from "./state.js";
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
